@@ -48,8 +48,7 @@ my $feed = {
 };
 
 for my $check (@{$res->{checks}}) {
-    # titleに名前、bodyにタイトル
-    # Notify::Growlで出力するため
+    # entryを作成
     my $entry = {
         title => $check->{user},
         body => $check->{title},
