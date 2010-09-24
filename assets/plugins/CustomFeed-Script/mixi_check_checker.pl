@@ -27,8 +27,7 @@ $mech->submit_form(
 $mech->get('http://mixi.jp/home.pl');
 
 ## チェックのページに移動
-my $checkurl = 'http://mixi.jp/recent_check.pl';
-my $resp = $mech->get($checkurl);
+$mech->follow_link(url_regex => qr{recent_check\.pl});
 
 ## チェックされたリンクに関する情報を取得
 my $scraper = scraper {
@@ -38,12 +37,12 @@ my $scraper = scraper {
         process ".title > a", link => '@href';
     };
 };
-my $res = $scraper->scrape($resp);
+my $res = $scraper->scrape($mech->content, $mech->uri);
 
 ## feed化
 my $feed = {
     title => "mixi recent check",
-    url => $checkurl,
+    link => $mech->uri,
     entries => [],
 };
 
