@@ -5,7 +5,6 @@ use warnings;
 
 use Web::Scraper;
 use URI;
-use Encode;
 use YAML;
 
 ## get publications list
